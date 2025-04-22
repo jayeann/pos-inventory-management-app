@@ -73,7 +73,10 @@ interface KPICardProps {
 }
 
 const KPICard = ({ kpiData, title }: KPICardProps) => {
-  const gridColsClass = kpiData.length <= 2 ? "grid-cols-1" : "grid-cols-2";
+  const gridColsClass =
+    kpiData.length <= 2
+      ? "grid grid-cols-2 md:grid-cols-1"
+      : "grid grid-cols-2 md:grid-cols-2";
 
   return (
     <Card className="flex-2 bg-white p-2">

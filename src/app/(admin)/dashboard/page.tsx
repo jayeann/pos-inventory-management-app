@@ -27,7 +27,7 @@ const Dashboard = ({ user }: DashboardProps) => {
       <h2 className="text-2xl font-bold text-gray-800">
         Welcome, {user?.email || "User"}
       </h2>
-      <div className="grid grid-cols-[2fr_2fr_1fr_1fr] gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-[2fr_2fr_1fr_1fr] gap-4">
         <KPICard title={"Sales Overview"} kpiData={salesData} />
         <KPICard title={"Purchase Overview"} kpiData={purchaseData} />
         <ChartCard title="Stock Status">
@@ -37,7 +37,7 @@ const Dashboard = ({ user }: DashboardProps) => {
         </ChartCard>
         <KPICard title={"Wastage Product"} kpiData={wastageData} />
       </div>
-      <div className="grid grid-cols-[4fr_2fr] gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-[4fr_2fr] gap-4">
         <ChartCard title="Sales Statistics"></ChartCard>
         <ChartCard title="Top Products"></ChartCard>
       </div>
