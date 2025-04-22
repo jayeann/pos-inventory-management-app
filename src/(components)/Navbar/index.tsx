@@ -10,14 +10,14 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex justify-between items-center w-full mb-7">
+    <div className="flex justify-between items-center w-full mb-3 mt-7 pr-7">
       {/* left side */}
       <div className="flex justify-between items-center gap-5">
         <button
           className="px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
           onClick={() => dispatch(toggleSidebar())}
         >
-          <Menu className="w-4 h-4" />
+          <Menu className="w-6 h-6" />
         </button>
         <div className="relative">
           <input

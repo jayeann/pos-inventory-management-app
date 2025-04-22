@@ -47,7 +47,7 @@ const SidebarLink = ({
         <span
           className={`${
             isCollapsed ? "hidden" : "block"
-          } font-medium text-gray-700`}
+          } text-sm text-gray-700`}
         >
           {label}
         </span>
