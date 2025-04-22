@@ -1,25 +1,28 @@
 "use client";
 
 import React from "react";
+import { Provider } from "react-redux";
 import { usePathname } from "next/navigation";
-// import Navbar from "../(components)/Navbar";
+import Navbar from "../(components)/Navbar";
 import Sidebar from "../(components)/Sidebar";
-// import StoreProvider, { useAppSelector } from "./redux";
+import { store, RootState } from "./redux/store";
+import { useSelector } from "react-redux";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   const pathname = usePathname();
   if (pathname === "/sign-in" || pathname === "/sign-up") {
     return <>{children}</>;
   }
 
   return (
-    <div className={`flex bg-gray-100 text-gray-900 w-full min-h-screen`}>
+    <div className={`flex w-full min-h-screen`}>
       <Sidebar />
       <main
-        className={`flex flex-col w-full h-full bg-gray-100`}
-        //   ${isSidebarCollapsed ? "md:pl-24" : "md:pl-72"}
+        className={`flex flex-col w-full h-full bg-gray-100
+        ${isOpen ? "md:pl-24" : "md:pl-72"}`}
       >
-        {/* <Navbar /> */}
+        <Navbar />
         {children}
       </main>
     </div>
@@ -28,9 +31,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 const ContentWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    // <StoreProvider>
-    <DashboardLayout>{children}</DashboardLayout>
-    // </StoreProvider>
+    <Provider store={store}>
+      <DashboardLayout>{children}</DashboardLayout>
+    </Provider>
   );
 };
 

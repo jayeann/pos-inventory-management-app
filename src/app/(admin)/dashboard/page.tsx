@@ -16,7 +16,7 @@ const Dashboard = ({ user }: DashboardProps) => {
     router.push("/sign-in");
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-black">
+    <div className="flex min-h-screen p-5">
       <Card className="w-full max-w-md shawdow-xl bg-white p-6">
         <CardHeader className="text-center py-6">
           <h2 className="text-2xl font-bold text-gray-800">

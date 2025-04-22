@@ -5,16 +5,16 @@ import {
   Folders,
   HandCoins,
   Layout,
-  SquareArrowUpRight,
+  ListChecks,
   LucideIcon,
   Menu,
   Package,
   Settings,
-  SquareArrowDown,
   Users,
 } from "lucide-react";
-// import { useAppDispatch, useAppSelector } from "@/app/redux";
-// import { setIsSidebarCollapsed } from "@/state";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSidebar } from "@/app/redux/sidebar";
+import { RootState, AppDispatch } from "@/app/redux/store";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -22,87 +22,74 @@ interface SidebarLinkProps {
   href: string;
   icon: LucideIcon;
   label: string;
-  // isCollapsed: boolean;
+  isCollapsed: boolean;
 }
 
 const SidebarLink = ({
   href,
   icon: Icon,
   label,
-}: // isCollapsed,
-SidebarLinkProps) => {
+  isCollapsed,
+}: SidebarLinkProps) => {
   const pathname = usePathname();
   const isActive =
     pathname.includes(href) || (pathname === "/" && href === "/dashboard ");
   return (
     <Link href={href}>
-      {/* ${
-            isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
-          } */}
       <div
-        className={`cursor-pointer flex items-center justify-start px-8 py-4"
-         hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors 
+        className={`cursor-pointer flex items-center 
+          ${
+            isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+          } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors 
           ${isActive && "bg-blue-200 text-white"}`}
       >
         <Icon className="w-6 h-6 !text-gray-700" />
-        {/* ${
+        <span
+          className={`${
             isCollapsed ? "hidden" : "block"
-          } */}
-        <span className={`block font-medium text-gray-700`}>{label}</span>
+          } font-medium text-gray-700`}
+        >
+          {label}
+        </span>
       </div>
     </Link>
   );
 };
 
 const Sidebar = () => {
-  // const dispatch = useAppDispatch();
+  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
+  const dispatch = useDispatch();
   // const isSidebarCollapsed = useAppSelector(
   //   (state) => state.global.isSidebarCollapsed
   // );
 
   // const toggleSidebar = () => {
-  //   dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+  //   dispatch(toggleSidebar());
   // };
 
-  // ${isSidebarCollapsed ? "w-0 md:w-16" : "w:72 md:w-64"}
-  const sidebarClassName = `fixed flex flex-col bg-white transition-all duration-300 overflow-hidden h-screen shadow-md z-40`;
-  {
-    /* <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-gray-800 text-white p-4">
-            <h2 class="text-2xl font-semibold mb-4">Dashboard</h2>
-            <ul class="space-y-4">
-                <li><a href="#" class="block hover:bg-gray-700 px-4 py-2 rounded">Home</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 px-4 py-2 rounded">Profile</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 px-4 py-2 rounded">Messages</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 px-4 py-2 rounded">Settings</a></li>
-                <li><a href="#" class="block hover:bg-gray-700 px-4 py-2 rounded">Logout</a></li>
-            </ul>
-        </div> */
-  }
+  const sidebarClassName = `fixed flex flex-col 
+  bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40 p-5
+   ${isOpen ? "w-0 md:w-16" : "w:72 md:w-64"}
+  `;
+
   return (
     <div className={sidebarClassName}>
       <div
-        className={`flex justify-between md:justify-normal items-center pt-8 
-         `}
-        //  ${isSidebarCollapsed ? "px-5" : "px-8"}
+        className={`flex gap-3 justify-between md:justify-normal items-center pt-8 
+        ${isOpen ? "px-5" : "px-8"}`}
       >
-        <img
-          src={"/images/icon-logo.png"}
-          alt="logo"
-          className="w-10 h-10 object-cover rounded-md"
-        />
-        {/* ${isSidebarCollapsed ? "hidden" : "block"} */}
+        <div>logo</div>
+
         <h1
-          className={`
+          className={` ${isOpen ? "hidden" : "block"}
           font-extrabold text-2xl`}
         >
-          Klippbox
+          PosInvent
         </h1>
 
         <button
           className="md:hidden px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
-          // onClick={toggleSidebar}
+          onClick={() => dispatch(toggleSidebar())}
         >
           <Menu className="w-4 h-4"></Menu>
         </button>
@@ -114,68 +101,62 @@ const Sidebar = () => {
           href="/dashboard"
           icon={Layout}
           label="Dashboard"
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
-        {/* <SidebarLink
+        <SidebarLink
           href="/point-of-sale"
           icon={Calculator}
           label="Point of Sale"
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/orders"
-          icon={SquareArrowUpRight}
-          label="Outbound Orders"
-          // isCollapsed={isSidebarCollapsed}
-        />
-        <SidebarLink
-          href="/restock"
-          icon={SquareArrowDown}
-          label="Inventory Restock"
-          // isCollapsed={isSidebarCollapsed}
+          icon={Folders}
+          label="Orders"
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/products"
           icon={Package}
           label="Products"
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/category"
-          icon={Folders}
+          icon={ListChecks}
           label="Category"
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/balance"
           icon={Layout}
           label="Outstanding Balance" // Balance Overview, Financial Balances, Account Balance Monitor
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/expenses"
           icon={HandCoins}
           label="Expenses"
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/users"
           icon={Users}
           label="Users"
-          // isCollapsed={isSidebarCollapsed}
+          isCollapsed={isOpen}
         />
         <SidebarLink
           href="/settings"
           icon={Settings}
           label="Settings"
-          // isCollapsed={isSidebarCollapsed}
-        /> */}
+          isCollapsed={isOpen}
+        />
       </div>
       {/* FOOTER */}
       <div className="flex items-center justify-center h-20">
         {/* {!isSidebarCollapsed && ( */}
         <p className="text-center text-xs text-gray-500">
-          &copy; 2024 Klippbox
+          &copy; 2024 PosInvent
         </p>
         {/* )} */}
       </div>
