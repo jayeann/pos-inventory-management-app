@@ -68,9 +68,8 @@ const Sidebar = () => {
   // };
 
   const sidebarClassName = `fixed flex flex-col 
-  bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40 p-5
-   ${isOpen ? "w-0 md:w-24" : "w-72 md:w-64"}
-  `;
+  ${isOpen ? "w-0 md:w-16" : "w:72 md:w-64"} 
+  bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
 
   return (
     <div className={sidebarClassName}>
