@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <Sidebar />
       <main
         className={`flex flex-col w-full h-full bg-gray-100 px-8
-        ${isOpen ? "md:pl-24" : "md:pl-72"}`}
+        ${isOpen ? "md:pl-72" : "md:pl-24"}`}
       >
         <Navbar />
         {children}

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Calculator,
   Folders,
@@ -13,10 +13,11 @@ import {
   Users,
 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebar } from "@/app/redux/sidebar";
+import { closeSidebar, toggleSidebar } from "@/app/redux/sidebar";
 import { RootState, AppDispatch } from "@/app/redux/store";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 interface SidebarLinkProps {
   href: string;
@@ -39,14 +40,14 @@ const SidebarLink = ({
       <div
         className={`cursor-pointer flex items-center
           ${
-            isCollapsed ? "justify-center py-6" : "justify-start px-4 py-2"
+            isCollapsed ? "justify-start px-4 py-2" : "justify-center py-6"
           } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors 
           ${isActive && "bg-blue-200"}`}
       >
         <Icon className="w-6 h-6 !text-gray-700" />
         <span
           className={`${
-            isCollapsed ? "hidden" : "block"
+            isCollapsed ? "block" : "hidden"
           } text-sm text-gray-700`}
         >
           {label}
@@ -57,8 +58,16 @@ const SidebarLink = ({
 };
 
 const Sidebar = () => {
-  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (isMobile) {
+      dispatch(closeSidebar()); // Auto-close on smaller screens
+    }
+  }, [isMobile, dispatch]);
+
   // const isSidebarCollapsed = useAppSelector(
   //   (state) => state.global.isSidebarCollapsed
   // );
@@ -68,14 +77,15 @@ const Sidebar = () => {
   // };
 
   const sidebarClassName = `fixed flex flex-col 
-  ${isOpen ? "w-0 md:w-16" : "w:72 md:w-64"} 
+  ${isOpen ? "w:72 md:w-64" : "w-0 md:w-16"} 
   bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
 
+  console.log(isMobile, isOpen);
   return (
     <div className={sidebarClassName}>
       <div
         className={`flex gap-3 justify-between md:justify-normal items-center pt-2 
-        ${isOpen ? "px-5" : "px-8"}`}
+        ${isOpen ? "px-8" : "px-5"}`}
       >
         <button
           className="md:hidden px-3 py-2 bg-gray-100 rounded-full hover:bg-blue-100"
@@ -84,7 +94,7 @@ const Sidebar = () => {
           <div>logo</div>
         </button>
         <h1
-          className={` ${isOpen ? "hidden" : "block"}
+          className={` ${isOpen ? "block" : "hidden"}
           font-extrabold text-xl`}
         >
           PosInvent
@@ -150,11 +160,11 @@ const Sidebar = () => {
       </div>
       {/* FOOTER */}
       <div className="flex items-center justify-center h-20">
-        {/* {!isSidebarCollapsed && ( */}
-        <p className="text-center text-xs text-gray-500">
-          &copy; 2024 PosInvent
-        </p>
-        {/* )} */}
+        {isOpen && (
+          <p className="text-center text-xs text-gray-500">
+            &copy; 2024 PosInvent
+          </p>
+        )}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ export interface IntitialStateTypes {
 }
 
 const initialState: IntitialStateTypes = {
-  isOpen: false,
+  isOpen: true,
 };
 
 const sidebarSlice = createSlice({
