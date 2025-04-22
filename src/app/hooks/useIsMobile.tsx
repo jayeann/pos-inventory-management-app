@@ -9,8 +9,6 @@ const useIsMobile = (breakpoint = 768): boolean => {
       setIsMobile(window.innerWidth < breakpoint);
     };
 
-    console.log(window.innerWidth, breakpoint);
-
     checkScreen();
     window.addEventListener("resize", checkScreen);
 

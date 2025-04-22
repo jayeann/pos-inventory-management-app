@@ -80,7 +80,6 @@ const Sidebar = () => {
   ${isOpen ? "w:72 md:w-64" : "w-0 md:w-16"} 
   bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
 
-  console.log(isMobile, isOpen);
   return (
     <div className={sidebarClassName}>
       <div
