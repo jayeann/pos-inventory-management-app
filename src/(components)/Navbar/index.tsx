@@ -10,7 +10,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex justify-between items-center w-full mb-3 mt-7 pr-7">
+    <div className="flex justify-between items-center w-full mb-3 mt-7 pr-7 pl-3">
       {/* left side */}
       <div className="flex justify-between items-center gap-5">
         <button

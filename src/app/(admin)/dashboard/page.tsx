@@ -17,7 +17,7 @@ const Dashboard = ({ user }: DashboardProps) => {
   };
   return (
     <div className="flex min-h-screen p-5">
-      <Card className="w-full max-w-md shawdow-xl bg-white p-6">
+      <Card className="w-full shawdow-xl bg-white p-6">
         <CardHeader className="text-center py-6">
           <h2 className="text-2xl font-bold text-gray-800">
             Welcome, {user?.email || "User"}
