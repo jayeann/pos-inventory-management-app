@@ -37,11 +37,11 @@ const SidebarLink = ({
   return (
     <Link href={href}>
       <div
-        className={`cursor-pointer flex items-center 
+        className={`cursor-pointer flex items-center
           ${
-            isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+            isCollapsed ? "justify-center py-6" : "justify-start px-4 py-2"
           } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors 
-          ${isActive && "bg-blue-200 text-white"}`}
+          ${isActive && "bg-blue-200"}`}
       >
         <Icon className="w-6 h-6 !text-gray-700" />
         <span
@@ -69,34 +69,31 @@ const Sidebar = () => {
 
   const sidebarClassName = `fixed flex flex-col 
   bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40 p-5
-   ${isOpen ? "w-0 md:w-16" : "w:72 md:w-64"}
+   ${isOpen ? "w-0 md:w-24" : "w-72 md:w-64"}
   `;
 
   return (
     <div className={sidebarClassName}>
       <div
-        className={`flex gap-3 justify-between md:justify-normal items-center pt-8 
+        className={`flex gap-3 justify-between md:justify-normal items-center pt-2 
         ${isOpen ? "px-5" : "px-8"}`}
       >
-        <div>logo</div>
-
+        <button
+          className="md:hidden px-3 py-2 bg-gray-100 rounded-full hover:bg-blue-100"
+          onClick={() => dispatch(toggleSidebar())}
+        >
+          <div>logo</div>
+        </button>
         <h1
           className={` ${isOpen ? "hidden" : "block"}
-          font-extrabold text-2xl`}
+          font-extrabold text-xl`}
         >
           PosInvent
         </h1>
-
-        <button
-          className="md:hidden px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
-          onClick={() => dispatch(toggleSidebar())}
-        >
-          <Menu className="w-4 h-4"></Menu>
-        </button>
       </div>
 
       {/* LINKS */}
-      <div className="flex-grow mt-8">
+      <div className="flex-grow mt-4">
         <SidebarLink
           href="/dashboard"
           icon={Layout}
