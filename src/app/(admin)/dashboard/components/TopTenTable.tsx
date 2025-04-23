@@ -11,7 +11,7 @@ import {
   getKeyValue,
 } from "@heroui/react";
 import { productsData, ProductTypes } from "../data/products";
-import usePriceFormatter from "@/app/hooks/usePriceFormatter";
+import usePriceFormatter from "@/hooks/usePriceFormatter";
 
 const columns = [
   {

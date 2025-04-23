@@ -1,7 +1,7 @@
 "use client";
 
 import { useDispatch } from "react-redux";
-import { toggleSidebar } from "@/app/redux/sidebar";
+import { toggleSidebar } from "@/redux/sidebar";
 import { Bell, Menu, Settings, Sun } from "lucide-react";
 import Link from "next/link";
 import React from "react";

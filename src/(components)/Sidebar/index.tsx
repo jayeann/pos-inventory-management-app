@@ -13,11 +13,11 @@ import {
   Users,
 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeSidebar, toggleSidebar } from "@/app/redux/sidebar";
-import { RootState, AppDispatch } from "@/app/redux/store";
+import { closeSidebar, toggleSidebar } from "@/redux/sidebar";
+import { RootState, AppDispatch } from "@/redux/store";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import useIsMobile from "@/app/hooks/useIsMobile";
+import useIsMobile from "@/hooks/useIsMobile";
 
 interface SidebarLinkProps {
   href: string;
