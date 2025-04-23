@@ -3,9 +3,9 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { usePathname } from "next/navigation";
-import Navbar from "../(components)/Navbar";
-import Sidebar from "../(components)/Sidebar";
-import { store, RootState } from "../redux/store";
+import Navbar from "@/(components)/Navbar";
+import Sidebar from "@/(components)/Sidebar";
+import { store, RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {

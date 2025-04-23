@@ -8,9 +8,11 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  getKeyValue,
 } from "@heroui/react";
-import { productsData, ProductTypes } from "../data/products";
+import {
+  productsData,
+  ProductTypes,
+} from "@/app/(admin)/dashboard/data/products";
 import usePriceFormatter from "@/hooks/usePriceFormatter";
 
 const columns = [
