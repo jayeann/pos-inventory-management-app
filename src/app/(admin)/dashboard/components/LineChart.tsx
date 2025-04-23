@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ComposedChart,
   Area,
@@ -23,7 +23,7 @@ const LineChart: React.FC = () => {
   const [data, setData] = useState<ChartData[]>(salesStatData["Data"]);
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
         data={data}
         margin={{ top: 25, right: 30, left: 20, bottom: 5 }}

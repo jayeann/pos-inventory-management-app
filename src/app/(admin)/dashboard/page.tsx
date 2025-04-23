@@ -9,6 +9,7 @@ import StockGauge from "./components/StockGauge";
 import { wastageData } from "./data/wastageData.ts";
 import ChartCard from "./components/ChartCard";
 import TopTenTable from "./components/TopTenTable";
+import LineChart from "./components/LineChart";
 
 type DashboardProps = {
   user: {
@@ -39,7 +40,9 @@ const Dashboard = ({ user }: DashboardProps) => {
         <KPICard title={"Wastage Product"} kpiData={wastageData} />
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-[4fr_2fr] gap-4">
-        <ChartCard title="Sales Statistics"></ChartCard>
+        <ChartCard title="Sales Statistics">
+          <LineChart />
+        </ChartCard>
         <ChartCard title="Top Selling Products">
           <TopTenTable />
         </ChartCard>
