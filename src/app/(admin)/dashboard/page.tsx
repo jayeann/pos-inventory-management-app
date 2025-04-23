@@ -8,6 +8,7 @@ import KPICard from "./components/KPICard";
 import StockGauge from "./components/StockGauge";
 import { wastageData } from "./data/wastageData.ts";
 import ChartCard from "./components/ChartCard";
+import TopTenTable from "./components/TopTenTable";
 
 type DashboardProps = {
   user: {
@@ -39,14 +40,13 @@ const Dashboard = ({ user }: DashboardProps) => {
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-[4fr_2fr] gap-4">
         <ChartCard title="Sales Statistics"></ChartCard>
-        <ChartCard title="Top Products"></ChartCard>
+        <ChartCard title="Top Selling Products">
+          <TopTenTable />
+        </ChartCard>
       </div>
 
       <Card className="w-full shawdow-xl bg-white p-6">
         <CardBody>
-          <p className="text-gray-600 mb-6 text-center">
-            This is your dashboard, you can do whatever you want here.
-          </p>
           <div className="text-center">
             <Button
               onPress={handleLogOut}

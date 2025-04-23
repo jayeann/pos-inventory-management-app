@@ -10,7 +10,6 @@ type StockGaugeChartProps = {
 const COLORS = ["#FFBB28", "#00C49F"];
 
 const StockGauge: React.FC<StockGaugeChartProps> = ({ onHold, pending }) => {
-  const total = onHold + pending;
   const data = [
     { name: "On Hold", value: onHold },
     { name: "Pending", value: pending },
@@ -29,6 +28,7 @@ const StockGauge: React.FC<StockGaugeChartProps> = ({ onHold, pending }) => {
           endAngle={0}
           innerRadius={60}
           outerRadius={100}
+          dataKey="value"
           cx="50%"
           cy="100%"
         >

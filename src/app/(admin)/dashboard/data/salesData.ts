@@ -1,4 +1,10 @@
-export const salesData = [
+type salesTypes = {
+  icon: string;
+  text: string;
+  value: string;
+  color: string;
+};
+export const salesData: salesTypes[] = [
   {
     icon: "shoppingcart",
     text: "Annual Sales",

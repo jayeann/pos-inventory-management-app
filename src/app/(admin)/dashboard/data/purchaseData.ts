@@ -1,4 +1,10 @@
-export const purchaseData = [
+type purchaseTypes = {
+  icon: string;
+  text: string;
+  value: string;
+  color: string;
+};
+export const purchaseData: purchaseTypes[] = [
   {
     icon: "shoppingbag",
     text: "No. of Purchase",
