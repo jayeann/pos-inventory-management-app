@@ -7,13 +7,13 @@ type wastageTypes = {
 
 export const wastageData: wastageTypes[] = [
   {
-    icon: "package",
+    icon: "Package",
     text: "No. of Item",
     value: "2460",
     color: "blue",
   },
   {
-    icon: "packageminus",
+    icon: "PackageMinus",
     text: "Loss",
     value: "1520",
     color: "red",

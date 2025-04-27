@@ -4,27 +4,28 @@ type purchaseTypes = {
   value: string;
   color: string;
 };
+
 export const purchaseData: purchaseTypes[] = [
   {
-    icon: "shoppingbag",
+    icon: "Shopping Bag",
     text: "No. of Purchase",
     value: "46",
     color: "purple",
   },
   {
-    icon: "cancel",
+    icon: "CircleX",
     text: "Cancel Order",
     value: "05",
     color: "red",
   },
   {
-    icon: "purchase",
+    icon: "HandCoins",
     text: "Purchase Amount",
     value: "789",
     color: "orange",
   },
   {
-    icon: "return",
+    icon: "Undo2",
     text: "Returns",
     value: "08",
     color: "pink",

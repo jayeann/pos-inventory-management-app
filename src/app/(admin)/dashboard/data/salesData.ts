@@ -4,27 +4,28 @@ type salesTypes = {
   value: string;
   color: string;
 };
+
 export const salesData: salesTypes[] = [
   {
-    icon: "shoppingcart",
+    icon: "ShoppingCart",
     text: "Annual Sales",
     value: "123",
     color: "blue",
   },
   {
-    icon: "filechartline",
+    icon: "FileChartLine",
     text: "Annual Profit",
     value: "456",
     color: "yellow",
   },
   {
-    icon: "shoppingbasket",
+    icon: "ShoppingBasket",
     text: "Daily Sales",
     value: "789",
     color: "orange",
   },
   {
-    icon: "filechartcolumnincreasing",
+    icon: "FileChartColumnIncreasing",
     text: "Daily Profit",
     value: "12%",
     color: "green",
