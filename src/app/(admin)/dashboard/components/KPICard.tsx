@@ -1,43 +1,9 @@
 import React from "react";
 import { Card, CardHeader, CardBody } from "@heroui/react";
-import {
-  ShoppingCart,
-  FileChartColumnIncreasing,
-  FileChartLine,
-  ShoppingBasket,
-  Ban,
-  ShoppingBag,
-  Undo2,
-  HandCoins,
-  CircleX,
-  LucideIcon,
-  Package,
-  PackageMinus,
-} from "lucide-react";
+import { colorMap } from "@/utils/colorMap";
 
-const colorMap: Record<string, string> = {
-  green: "#10B981",
-  orange: "#FF9800",
-  yellow: "#FFEB3B",
-  blue: "#3B82F6",
-  purple: "#9C27B0",
-  red: "#F44336",
-  pink: "#E91E63",
-  default: "#6B7280",
-};
-
-const iconsMap: Record<string, LucideIcon> = {
-  shoppingbasket: ShoppingBasket,
-  shoppingcart: ShoppingCart,
-  filechartline: FileChartLine,
-  filechartcolumnincreasing: FileChartColumnIncreasing,
-  shoppingbag: ShoppingBag,
-  return: Undo2,
-  purchase: HandCoins,
-  cancel: CircleX,
-  package: Package,
-  packageminus: PackageMinus,
-};
+import * as Icons from "lucide-react";
+import { Ban, LucideIcon } from "lucide-react";
 
 export type KPIItem = {
   icon: string;
@@ -48,7 +14,7 @@ export type KPIItem = {
 
 const KPIItems = ({ icon, text, value, color }: KPIItem) => {
   const colorHex = colorMap[color] || colorMap["default"];
-  const IconComponent = iconsMap[icon] || Ban;
+  const Icon = (Icons[icon as keyof typeof Icons] ?? Ban) as LucideIcon;
   return (
     <div className="flex">
       <div className="flex items-center justify-center mr-2">
@@ -56,7 +22,7 @@ const KPIItems = ({ icon, text, value, color }: KPIItem) => {
           className="px-3 py-3 rounded-full"
           style={{ backgroundColor: `${colorHex}20` }} // Light background
         >
-          <IconComponent className="w-6 h-6" style={{ color: colorHex }} />
+          <Icon className="w-6 h-6" style={{ color: colorHex }} />
         </div>
       </div>
       <div className="flex flex-col justify-between">
