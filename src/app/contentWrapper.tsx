@@ -23,7 +23,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         ${isOpen ? "md:pl-72" : "md:pl-24"}`}
       >
         <Navbar />
-        {children}
+        <div className="min-h-screen p-5 space-y-4">{children}</div>
       </main>
     </div>
   );
