@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## 🚧 Caution: Innovating. Experimenting. Evolving.
 
-First, run the development server:
+**Warning**: This repository contains:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Experimental code
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🚀 What's Happening
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Code is brewing** ☕
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔬 What is this?
+A work-in-progress project.
 
-## Learn More
+### 🧪 Why?
+This repo is about seeing what’s possible when we try something new—even if it breaks sometimes.
 
-To learn more about Next.js, take a look at the following resources:
+### 🚀 Goals
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Learn new techs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Discover groundbreaking solutions
 
-## Deploy on Vercel
+- Break things, learn things, repeat
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Have fun building
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Create game-changing solutions for business
+
+### 🛠️ Tech Stack (so far)
+
+- **Next.js** – Framework for server-rendered React apps
+- **Zod** – Type-safe schema validation
+- **React Hook Form** – Lightweight form management
+- **Firebase** – Backend services (Auth, Firestore, etc.)
+- **Hero UI** – Pre-built accessible UI components
+- **Recharts** – Composable charting library for React. Good for dashboards, basic visualizations
+
+### 🚀 Something I would like to try in this project
+
+- **Zustand** - Simple, fast state management for React.
+- **React Query / TanStack Query** – Efficient data fetching and caching for APIs.
+- **React Testing Library** – Tests React components by simulating user interactions.
+- **Cypress** – End-to-end testing for real-world workflows.
+- **Playwright** – Cross-browser end-to-end testing.
+
+---
+*Last Updated: April 2025 - Imagination in Progress* 🌈
+---
+
+### 🤖 Coming Soon
