@@ -25,7 +25,7 @@ const Dashboard = ({ user }: DashboardProps) => {
   };
 
   return (
-    <div className=" min-h-screen p-5 space-y-4">
+    <>
       <h2 className="text-2xl font-bold text-gray-800">
         Welcome, {user?.email || "User"}
       </h2>
@@ -62,7 +62,7 @@ const Dashboard = ({ user }: DashboardProps) => {
           </div>
         </CardBody>
       </Card>
-    </div>
+    </>
   );
 };
 
