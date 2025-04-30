@@ -17,6 +17,7 @@ const ColorPicker = ({
 }: ColorPickerProps) => {
   return (
     <RadioGroup
+      id="colorpicker-radio"
       value={value}
       onValueChange={onChange}
       onBlur={onBlur}
@@ -29,7 +30,7 @@ const ColorPicker = ({
           <Radio
             key={colorName}
             value={colorName}
-            className="relative w-10 h-10 m-2 rounded cursor-pointer ring-2 transition"
+            className="radio-btn relative w-10 h-10 m-2 rounded cursor-pointer ring-2 transition"
             style={{
               backgroundColor: hex,
               border: `2px solid ${value === colorName ? "#1E40AF" : "#ddd"}`, // Blue border when selected
