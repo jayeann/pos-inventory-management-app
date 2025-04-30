@@ -161,7 +161,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-center h-20">
         {isOpen && (
           <p className="text-center text-xs text-gray-500">
-            &copy; 2024 PosInvent
+            &copy; 2025 PosInvent
           </p>
         )}
       </div>
