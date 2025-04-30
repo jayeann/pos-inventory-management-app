@@ -10,6 +10,7 @@ const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
   color: z.string().min(1, "Color is required"),
   icon: z.string().min(5, "Message must be at least 5 characters"),
+  description: z.string().min(5, "Message must be at least 5 characters"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -57,6 +58,18 @@ export default function CategoryCard() {
             labelPlacement="outside"
             name="category name"
             placeholder="Enter category name"
+          />
+
+          <Input
+            isRequired
+            {...register("description")}
+            errorMessage={
+              errors.description && <p>{errors.description.message}</p>
+            }
+            label="Description"
+            labelPlacement="outside"
+            name="description"
+            placeholder="Enter description"
           />
 
           <Controller
