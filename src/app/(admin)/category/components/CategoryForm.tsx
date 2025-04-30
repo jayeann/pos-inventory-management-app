@@ -3,8 +3,9 @@
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Input, RadioGroup, Radio, Form } from "@heroui/react";
+import { Input, Form } from "@heroui/react";
 import ColorPicker from "./ColorPicker";
+import IconPicker from "./IconPicker";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -77,6 +78,8 @@ export default function CategoryCard() {
             control={control}
             render={({ field }) => <ColorPicker {...field} />}
           />
+
+          <IconPicker />
 
           {/* 
          
