@@ -1,113 +1,61 @@
-import React, { useState } from "react";
-import {
-  Package,
-  Box,
-  ShoppingCart,
-  Tag,
-  Clipboard,
-  File,
-  CreditCard,
-  Archive,
-  Plus,
-  Minus,
-  Edit,
-  Trash,
-  Check,
-  Search,
-  Filter,
-  Save,
-  Download,
-  Upload,
-  Home,
-  Menu,
-  Settings,
-  CheckCircle,
-  XCircle,
-  AlertTriangle,
-  Clock,
-  Loader,
-} from "lucide-react";
-
-const iconList = [
-  { name: "Package", component: <Package /> },
-  { name: "Box", component: <Box /> },
-  { name: "ShoppingCart", component: <ShoppingCart /> },
-  { name: "Tag", component: <Tag /> },
-  { name: "Clipboard", component: <Clipboard /> },
-  { name: "File", component: <File /> },
-  { name: "CreditCard", component: <CreditCard /> },
-  { name: "Archive", component: <Archive /> },
-  { name: "Plus", component: <Plus /> },
-  { name: "Minus", component: <Minus /> },
-  { name: "Edit", component: <Edit /> },
-  { name: "Trash", component: <Trash /> },
-  { name: "Check", component: <Check /> },
-  { name: "Search", component: <Search /> },
-  { name: "Filter", component: <Filter /> },
-  { name: "Save", component: <Save /> },
-  { name: "Download", component: <Download /> },
-  { name: "Upload", component: <Upload /> },
-  { name: "Home", component: <Home /> },
-  { name: "Menu", component: <Menu /> },
-  { name: "Settings", component: <Settings /> },
-  { name: "CheckCircle", component: <CheckCircle /> },
-  { name: "XCircle", component: <XCircle /> },
-  { name: "AlertTriangle", component: <AlertTriangle /> },
-  { name: "Clock", component: <Clock /> },
-  { name: "Loader", component: <Loader /> },
-];
-
-type IconItem = {
+import React from "react";
+import { RadioGroup, Radio } from "@heroui/react";
+import categorizedIcons from "./IconCategories";
+interface IconPickerProps {
   name: string;
-  component: any;
-};
+  value?: string;
+  onChange: (...event: any[]) => void;
+  onBlur: (e: React.FocusEvent<Element>) => void;
+}
 
-const InventoryApp = () => {
-  const [selectedIcon, setSelectedIcon] = useState<IconItem | null>(null);
-  const handleIconClick = (icon: IconItem) => {
-    setSelectedIcon(icon);
-  };
-
+const IconPicker = ({
+  name,
+  value = "Package", // Default icon is Package
+  onChange,
+  onBlur,
+}: IconPickerProps) => {
   return (
-    <div>
-      <h1>Inventory App - Icon Picker</h1>
-      <div>
-        <h3>Select an Icon for the Inventory Item</h3>
-        <div style={{ marginBottom: "20px" }}>
-          {selectedIcon ? (
-            <div>
-              <h4>Selected Icon:</h4>
-              {selectedIcon.component}
-            </div>
-          ) : (
-            <p>No icon selected</p>
-          )}
-        </div>
-      </div>
-
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-        {iconList.map((icon) => (
-          <div
-            key={icon.name}
-            style={{
-              cursor: "pointer",
-              padding: "10px",
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-              width: "50px",
-              textAlign: "center",
-            }}
-            onClick={() => handleIconClick(icon)}
-          >
-            {icon.component}
-            <div style={{ fontSize: "10px", wordBreak: "break-word" }}>
-              {icon.name}
-            </div>
+    <>
+      <RadioGroup
+        id="iconpicker-radio"
+        value={value}
+        onValueChange={onChange}
+        onBlur={onBlur}
+        name={name}
+        orientation="horizontal"
+        label="Pick an icon"
+      >
+        <div className="h-80 flex flex-col p-4 border border-gray-300 rounded-md bg-gray-50">
+          <div className="flex-1 overflow-y-auto pr-2">
+            {Object.entries(categorizedIcons).map(([category, icons]) => (
+              <div key={category} className="mb-4">
+                <h5 className="mb-2 text-xs capitalize text-gray-700">
+                  {category}
+                </h5>
+                <div className="grid grid-cols-5 gap-4">
+                  {icons.map((icon) => (
+                    <Radio
+                      key={icon.name}
+                      value={icon.name}
+                      className={`icon-radio-btn m-0 flex flex-col items-center justify-center w-16 h-16 aspect-square border-2 rounded-lg cursor-pointer transition-transform ${
+                        value === icon.name
+                          ? "border-blue-600 scale-110"
+                          : "border-gray-300"
+                      } bg-white`}
+                    >
+                      <div className="flex items-center justify-center w-full h-full">
+                        {icon.component}
+                      </div>
+                    </Radio>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      </RadioGroup>
+    </>
   );
 };
 
-export default InventoryApp;
+export default IconPicker;

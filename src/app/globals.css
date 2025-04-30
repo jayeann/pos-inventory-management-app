@@ -27,7 +27,21 @@ body {
   } 
 }
 
+.icon-radio-btn > input + span{
+   display: none;
+}
+
+.icon-radio-btn div.ms-2 {
+  margin-left: 0 !important;
+}
+
 .radio-btn {
   @apply w-6 h-6 border-2 rounded-full border-gray-500 flex justify-center items-center;
 }
+
+/* CUSTOM ICON */
+
+
+
+
 
