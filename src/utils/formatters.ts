@@ -5,3 +5,7 @@ export const convertDate = (timestamp: number): string =>
 
 export const convertValue = (value: number): string =>
   `${Math.floor(value / 1e3)}M`;
+
+export function capitalize(s: string) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : "";
+}
