@@ -28,16 +28,16 @@ export default function AddCategory() {
                 Add Category
               </DrawerHeader>
               <DrawerBody>
-                <CategoryForm />
+                <CategoryForm onClose={onClose} />
               </DrawerBody>
-              <DrawerFooter>
+              {/* <DrawerFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  Cancel
                 </Button>
                 <Button color="primary" onPress={onClose}>
                   Submit
                 </Button>
-              </DrawerFooter>
+              </DrawerFooter> */}
             </>
           )}
         </DrawerContent>
