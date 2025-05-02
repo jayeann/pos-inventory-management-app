@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ToastContainer } from "react-toastify";
-import { HeroUIProvider } from "@heroui/react";
 import ContentWrapper from "./contentWrapper";
+import Providers from "@/(components)/Providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <HeroUIProvider>
+        <Providers>
           <ContentWrapper>{children}</ContentWrapper>
           <ToastContainer
             position="top-right"
@@ -44,7 +44,7 @@ export default function RootLayout({
             pauseOnHover
             theme="light"
           />
-        </HeroUIProvider>
+        </Providers>
       </body>
     </html>
   );
