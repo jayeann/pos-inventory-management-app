@@ -1,19 +1,12 @@
 
-## 🚧 Caution: Innovating. Experimenting. Evolving.
+## 🚧 Caution: 
 
-**Warning**: This repository contains:
+This repository contains:
 
 - Experimental code
 
-### 🚀 What's Happening
-
-- **Code is brewing** ☕
-
 ### 🔬 What is this?
-A work-in-progress project.
-
-### 🧪 Why?
-This repo is about seeing what’s possible when we try something new—even if it breaks sometimes.
+A work-in-progress project. 
 
 ### 🚀 Goals
 
