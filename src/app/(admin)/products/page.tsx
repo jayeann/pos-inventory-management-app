@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import CustomTable from "@/(components)/CustomTable";
 import Header from "@/(components)/Header";
 import { productColumns } from "@/utils/tableFormatter/ProductsTableFormat";
@@ -15,19 +16,23 @@ import {
   DropdownMenu,
   DropdownItem,
   Chip,
+  useDisclosure,
   User,
 } from "@heroui/react";
 import { statusColorMap } from "@/utils/statusMap";
 import { EllipsisVertical } from "lucide-react";
+import ProductModal from "./ProductModal";
 
 const Product = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <>
       <Header name="Products" />
       <CustomTable
         id="product-table"
         columns={productColumns}
-        data={products}
+        data={products || []}
         statusOptions={statusOptions}
         sortColumn="name"
         sortDirection="ascending"
@@ -92,6 +97,13 @@ const Product = () => {
               return cellValue;
           }
         }}
+        handleClick={onOpen}
+        btnText="Add New"
+      />
+      <ProductModal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isAdd
       />
     </>
   );
