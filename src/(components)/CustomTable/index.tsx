@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableHeader,
@@ -106,13 +107,15 @@ export const ChevronDownIcon = ({
 interface CustomTableProps {
   id: string;
   columns: DefaultColumn[];
-  data: any;
+  data: any[];
   statusOptions: StatusOption[];
   isStatusFilterVisible: boolean;
   isColumnFilterVisible?: boolean;
   sortColumn: string;
   sortDirection: string;
   renderCell: (item: any, columnKey: string) => React.ReactNode;
+  handleClick?: () => void;
+  btnText?: string;
 }
 
 type SortDirection = "ascending" | "descending";
@@ -126,7 +129,11 @@ export default function CustomTable({
   sortColumn,
   sortDirection,
   renderCell,
+  handleClick,
+  btnText,
 }: CustomTableProps) {
+  // Add mounted state to prevent hydration issues
+  const [isMounted, setIsMounted] = useState(false);
   const [filterValue, setFilterValue] = useState("");
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [statusFilter, setStatusFilter] = useState<Set<string>>(
@@ -139,10 +146,15 @@ export default function CustomTable({
   });
   const [page, setPage] = useState(1);
 
+  // Ensure component is mounted before rendering interactive elements
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
-    return columns.filter((column) => column.uid !== "id"); // ⬅️ exclude id column
+    return columns.filter((column) => column.uid !== "id");
   }, [columns]);
 
   const filteredItems = React.useMemo(() => {
@@ -150,17 +162,19 @@ export default function CustomTable({
 
     if (hasSearchFilter) {
       filteredData = filteredData.filter((item) =>
-        item.name.toLowerCase().includes(filterValue.toLowerCase())
+        item.name?.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
-    if (statusFilter.size !== statusOptions.length && statusFilter.size > 0) {
+
+    // Fix status filter logic
+    if (!statusFilter.has("all") && statusFilter.size > 0) {
       filteredData = filteredData.filter((item) =>
-        Array.from(statusFilter).includes(item.status)
+        statusFilter.has(item.status)
       );
     }
 
     return filteredData;
-  }, [data, filterValue, statusFilter]);
+  }, [data, filterValue, statusFilter, hasSearchFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage) || 1;
 
@@ -215,6 +229,30 @@ export default function CustomTable({
     setPage(1);
   }, []);
 
+  // Fixed selection change handler
+  const handleSelectionChange = React.useCallback(
+    (keys: any) => {
+      if (keys === "all") {
+        setSelectedKeys(new Set(data.map((item) => item.id?.toString() || "")));
+      } else {
+        setSelectedKeys(
+          new Set(Array.from(keys).map((key: any) => key.toString()))
+        );
+      }
+    },
+    [data]
+  );
+
+  // Fixed status filter handler
+  const handleStatusFilterChange = React.useCallback((keys: any) => {
+    if (keys === "all") {
+      setStatusFilter(new Set(["all"]));
+    } else {
+      const keysArray = Array.from(keys).map((key: any) => key.toString());
+      setStatusFilter(new Set(keysArray));
+    }
+  }, []);
+
   const topContent = React.useMemo(() => {
     return (
       <div className="flex flex-col gap-4">
@@ -225,7 +263,7 @@ export default function CustomTable({
             placeholder="Search by name..."
             startContent={<SearchIcon />}
             value={filterValue}
-            onClear={() => onClear()}
+            onClear={onClear}
             onValueChange={onSearchChange}
           />
           <div className="flex gap-3">
@@ -245,13 +283,7 @@ export default function CustomTable({
                   closeOnSelect={false}
                   selectedKeys={statusFilter}
                   selectionMode="multiple"
-                  onSelectionChange={(keys) => {
-                    if (keys === "all") {
-                      setStatusFilter(new Set(["all"]));
-                    } else {
-                      setStatusFilter(new Set(keys as Set<string>));
-                    }
-                  }}
+                  onSelectionChange={handleStatusFilterChange}
                 >
                   {statusOptions.map((status) => (
                     <DropdownItem key={status.uid} className="capitalize">
@@ -261,9 +293,15 @@ export default function CustomTable({
                 </DropdownMenu>
               </Dropdown>
             )}
-            <Button color="primary" endContent={<PlusIcon />}>
-              Add New
-            </Button>
+            {handleClick && (
+              <Button
+                color="primary"
+                endContent={<PlusIcon />}
+                onPress={handleClick}
+              >
+                {btnText || "Button"}
+              </Button>
+            )}
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -275,6 +313,7 @@ export default function CustomTable({
             <select
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
+              value={rowsPerPage}
             >
               <option value="5">5</option>
               <option value="10">10</option>
@@ -290,14 +329,19 @@ export default function CustomTable({
     onRowsPerPageChange,
     data.length,
     onSearchChange,
-    hasSearchFilter,
+    onClear,
+    isStatusFilterVisible,
+    statusOptions,
+    handleStatusFilterChange,
+    rowsPerPage,
   ]);
 
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
         <span className="w-[30%] text-small text-default-400">
-          {selectedKeys.size === filteredItems.length
+          {selectedKeys.size === filteredItems.length &&
+          filteredItems.length > 0
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
         </span>
@@ -330,7 +374,23 @@ export default function CustomTable({
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [
+    selectedKeys.size,
+    filteredItems.length,
+    page,
+    pages,
+    onPreviousPage,
+    onNextPage,
+  ]);
+
+  // Show loading state until mounted to prevent hydration issues
+  if (!isMounted) {
+    return (
+      <div className="w-full h-64 flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <Table
@@ -347,9 +407,7 @@ export default function CustomTable({
       sortDescriptor={sortDescriptor}
       topContent={topContent}
       topContentPlacement="outside"
-      onSelectionChange={(keys) => {
-        setSelectedKeys(new Set(keys as Set<string>));
-      }}
+      onSelectionChange={handleSelectionChange}
       onSortChange={setSortDescriptor}
     >
       <TableHeader columns={headerColumns}>
